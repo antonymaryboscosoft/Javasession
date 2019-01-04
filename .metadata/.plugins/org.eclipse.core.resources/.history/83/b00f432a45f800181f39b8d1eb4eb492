@@ -1,0 +1,138 @@
+package Addreading;
+
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
+import io.appium.java_client.android.AndroidDriver;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.openqa.selenium.By;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+public class Addbaby {
+		AppiumDriver driver;
+		XSSFWorkbook wb;
+		XSSFSheet sheet;
+		FileInputStream fis;
+		@BeforeMethod
+public void setUp() throws IOException {
+		File src = new File ("C:/Users/unit2a/Desktop/Newfolder/workspace/AppiumAndroid/src/Xlfile/Datadriven1.xlsx");
+		fis = new FileInputStream(src);	
+		wb = new XSSFWorkbook(fis);
+		sheet = wb.getSheetAt(0);
+		
+		
+	//app launch	
+	DesiredCapabilities capabilities = new DesiredCapabilities();
+	capabilities.setCapability("deviceName", "TestOneAdb1");
+	capabilities.setCapability(CapabilityType.PLATFORM,"Android");
+	capabilities. setCapability("platformVersion","6.0");
+	capabilities.setCapability("unicodeKeyboard", true);
+	capabilities.setCapability("resetKeyboard", true);
+	File file = new File("/Users/unit2a/Downloads", "app-debug (3).apk");
+	capabilities.setCapability("app",file.getAbsolutePath());
+	driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"),capabilities);
+
+	
+	}
+	@Test 
+	public void TestMethod() throws InterruptedException{
+
+		MobileElement loginlink = (MobileElement) driver.findElement(By.className("android.widget.TextView"));
+		loginlink.click();
+	
+		driver.findElementById("com.ozeri.babyscale:id/btnLetsGo").click();
+		driver.findElementById("com.ozeri.babyscale:id/btn_nxt").click();
+		driver.findElementById("com.ozeri.babyscale:id/btn_nxt").click();
+		driver.findElementById("com.ozeri.babyscale:id/btn_nxt").click();
+		driver.findElementById("com.ozeri.babyscale:id/btn_nxt").click();
+		driver.findElementById("com.ozeri.babyscale:id/btn_nxt").click();
+		driver.findElementById("com.ozeri.babyscale:id/btn_nxt").click();
+	
+	
+	//add baby
+	//1.name
+	driver.findElementByClassName("android.widget.EditText").sendKeys("anto");
+	Thread.sleep(2000);
+	driver.findElementById("com.ozeri.babyscale:id/txtDob").click();
+	Thread.sleep(2000);
+	
+	//2.date of birth
+	driver.findElementByClassName("android.view.View[@content-desc='13 November 2018']").click();	  //Set Year = 2009.
+	Thread.sleep(2000);
+	//driver.findElement(By.id("android:id/button1")).click();
+	Thread.sleep(2000);
+
+	//3.gender
+	driver.findElement(By.id("com.ozeri.babyscale:id/txt_gender")).click();
+	Thread.sleep(2000);
+	driver.findElement(By.id("android:id/text1")).click();
+	Thread.sleep(2000);
+	driver.findElement(By.id("com.ozeri.babyscale:id/img_add")).click();
+	Thread.sleep(2000);
+	driver.findElement(By.id("android:id/button1")).click();
+	Thread.sleep(2000);
+	
+	//Add measurement
+	driver.findElement(By.id("com.ozeri.babyscale:id/btn_add_measurement")).click();
+	Thread.sleep(2000);
+	
+	driver.findElement(By.id("android:id/button1")).click();
+	Thread.sleep(2000);
+
+	driver.findElement(By.id("com.android.packageinstaller:id/permission_allow_button")).click();
+	Thread.sleep(2000);
+	
+	driver.findElement(By.id("com.ozeri.babyscale:id/rbManualBtn")).click();
+	Thread.sleep(2000);
+		
+	
+	
+	
+	
+	
+	
+	
+
+	
+//	1.get the data from excel:
+		utilpackage.Xls_Reader1 reader = new utilpackage.Xls_Reader1("C:/Users/unit2a/Desktop/Newfolder/workspace/Datadriven/src/com/excel/utility/Datadriven1.xlsx");
+			
+			int rowCount = reader.getRowCount("Addbabies");
+//			.status view in xl sheet like pass or fail
+			reader.addColumn("Addbabies", "Status");
+			for(int rowNum = 1; rowNum<= rowCount; rowNum++){
+				
+				//Set Date = 25. 
+				System.out.println("========");
+//				Integer data4= (int)wb.getSheetAt(0).getRow(rowNum).getCell(1).getNumericCellValue();
+				String data = wb.getSheetAt(0).getRow(rowNum).getCell(0).getStringCellValue();
+				System.out.println("data from xl "+data);
+				  //String str= data.toString();
+				driver.findElementByClassName("android.view.View").sendKeys(data);
+				Thread.sleep(2000);
+
+				//Set Month = Aug.
+				//driver.findElementByClassName("android.view.View").sendKeys("Date");	  //Set Year = 2009.
+				//Click on Done button.
+				driver.findElement(By.id("android:id/button1")).click();
+				Thread.sleep(2000);
+				
+
+				
+	
+	
+	}
+	
+	
+	}}

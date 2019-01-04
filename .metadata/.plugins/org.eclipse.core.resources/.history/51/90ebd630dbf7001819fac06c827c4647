@@ -1,0 +1,17 @@
+name = tom	
+age = 15	
+URL = https://scgi.half.ebay.com/ws/eBayISAPI.dll?RegisterEnterinfo
+browser = chrome
+######## Register page ########
+firstName = antony
+lastName = mary
+city = chennai
+######## Register page  object repository########
+firstname_xpath = .//*[@id='firstname']
+lastname_xpath = .//*[@id='lastname']
+city_xpath = .//*[@id='city']
+######## login page  object repository########
+email_id = 
+password_id =
+signin_btn_id =
+forgotpassword_link_xpath =

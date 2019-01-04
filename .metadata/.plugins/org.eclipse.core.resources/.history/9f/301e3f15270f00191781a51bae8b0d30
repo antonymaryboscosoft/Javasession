@@ -1,0 +1,17 @@
+package Condition;
+/*The nested if statement represents the if block within another if block. Here, 
+  the inner if block condition executes only when outer if block condition is true.*/
+public class Nestedifclass {
+public static void main(String[] args){
+	int age = 20;
+	int weight = 40;
+	if(age>=18 & weight>=40){
+	
+		System.out.println("you are eligible to donate blood"); 
+	
+	}else{
+		System.out.println("you are not eligible to donate blood"); 
+	}
+	
+}
+}

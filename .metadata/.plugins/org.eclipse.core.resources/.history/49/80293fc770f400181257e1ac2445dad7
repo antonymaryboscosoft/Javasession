@@ -1,0 +1,56 @@
+package CRUD;
+
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+
+public class CRUDOperation {
+	public static void main(String[] args) throws InterruptedException {
+		System.setProperty("webdriver.chrome.driver","E:/anto/seleniumchrom/chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.manage().deleteAllCookies();
+		driver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
+		
+		driver.get("https://www.freecrm.com/index.html");
+		driver.findElement(By.name("username")).sendKeys("antonymary");
+		driver.findElement(By.name("password")).sendKeys("antonymary");
+		Thread.sleep(2000);
+		driver.findElement(By.xpath("//input[@type='submit']")).click();
+		Thread.sleep(2000);
+
+		driver.switchTo().frame("mainpanel");
+		driver.findElement(By.xpath("//a[contains(text(),'Contacts')]")).click();	
+		
+		// Enter the values
+		Thread.sleep(2000);
+
+		Select select = new  Select(driver.findElement(By.name("cs_status")));
+		select.selectByVisibleText("New");
+		
+		Thread.sleep(2000);
+		Select select1 = new Select(driver.findElement(By.name("cs_category")));
+		select1.selectByVisibleText("Lead");
+		
+		Thread.sleep(2000);
+		driver.findElement(By.xpath("//*[@id='extendedSearchLayer']/table/tbody/tr[2]/td[1]/table/tbody/tr[3]/td[2]/input")).sendKeys("alex");	
+		driver.findElement(By.xpath("//*[@id='extendedSearchLayer']/table/tbody/tr[2]/td[1]/table/tbody/tr[4]/td[2]/input")).sendKeys("Bosco");	
+		driver.findElement(By.xpath("//*[@id='extendedSearchLayer']/table/tbody/tr[2]/td[1]/table/tbody/tr[5]/td[2]/input")).sendKeys("peterantonymary@gmail.com");	
+		driver.findElement(By.xpath("//*[@id='extendedSearchLayer']/table/tbody/tr[2]/td[1]/table/tbody/tr[5]/td[2]/input")).sendKeys("peterantonymary@gmail.com");	
+
+		
+		Select select2 = new Select(driver.findElement(By.name("cs_address_type")));
+		select2.selectByVisibleText("Billing");
+		driver.findElement(By.xpath("//input[@type='checkbox']")).click();
+		driver.findElement(By.xpath("//*[@id='extendedSearchLayer']/table/tbody/tr[2]/td[2]/table/tbody/tr[5]/td[2]/input")).click();	
+		//driver.close();
+		//driver.findElement(By.xpath("//input[@type='button']")).click();
+
+		driver.quit();
+	}
+	
+}
